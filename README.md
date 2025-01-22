@@ -1,36 +1,72 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Global Insights 🌍
 
-## Getting Started
+A modern web application that provides real-time insights and comparisons of global economic indicators, demographic data, and key statistics across different countries. Built with modern web technologies for performance and scalability.
 
-First, run the development server:
+## Features ✨
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **Interactive World Map**: Visualize and compare country data with an interactive map interface
+- **Real-time Analytics**: Track live economic indicators and demographic changes
+- **Country Comparisons**: Side-by-side comparison of multiple countries across various metrics
+- **Custom Data Views**: Create and save personalized dashboards for frequently monitored countries
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Getting Started 🚀
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Prerequisites
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- Docker and Docker Compose
+- Node.js 18.x or later
 
-## Learn More
+### Setup & Installation
 
-To learn more about Next.js, take a look at the following resources:
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/danish-ali-malik/global-insights.git
+   cd global-insights
+   ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+3. Set up your environment variables:
+   ```bash
+   cp .env.example .env
+   ```
+   Update the `.env` file with your configuration by referring to `.env.example`
 
-## Deploy on Vercel
+4. Start the database using Docker:
+   ```bash
+   npm run db:up
+   ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+5. Generate Prisma client and run migrations:
+   ```bash
+   npm run prisma:generate
+   npm run prisma:migrate
+   ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+6. Start the development server:
+   ```bash
+   npm run dev
+   ```
+
+The application will be available at [http://localhost:3000](http://localhost:3000)
+
+## Available Scripts 📜
+
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run start` - Start production server
+- `npm run lint` - Run ESLint
+- `npm run lint:fix` - Fix ESLint issues
+- `npm run format` - Format code with Prettier
+- `npm run format:check` - Check code formatting
+- `npm run type-check` - Check TypeScript types
+- `npm run validate` - Run all checks (lint, format, type-check)
+- `npm run db:up` - Start database containers
+- `npm run db:down` - Stop database containers
+- `npm run db:logs` - View database container logs
+- `npm run prisma:generate` - Generate Prisma client
+- `npm run prisma:migrate` - Run database migrations
+- `npm run prisma:studio` - Open Prisma Studio
