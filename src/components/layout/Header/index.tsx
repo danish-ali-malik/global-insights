@@ -1,5 +1,5 @@
 import Link from 'next/link';
-
+import { GlobeAltIcon } from '@heroicons/react/24/outline';
 /**
  * Header Component
  *
@@ -20,7 +20,7 @@ export const Header = () => {
             href="/"
             className="flex items-center text-xl font-bold text-[#111827] transition-all duration-200 hover:text-[#1A56DB]"
           >
-            <span className="mr-1 text-[#1A56DB]">🌍</span>
+            <GlobeAltIcon className="mr-2 h-6 w-6 text-blue-600" />
             Global Insights
           </Link>
           <div className="flex items-center space-x-8">
