@@ -9,11 +9,9 @@ import { SVGProps } from 'react';
  * @property {string} title - The display title of the feature
  * @property {string} description - A brief description of the feature
  * @property {React.ComponentType<React.SVGProps<SVGSVGElement>>} Icon - The Heroicon component to display
- * @property {string} iconColor - The Tailwind CSS color class for the icon
  */
 export interface Feature {
   title: string;
   description: string;
   Icon: React.ComponentType<SVGProps<SVGSVGElement>>;
-  iconColor: string;
 }

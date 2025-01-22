@@ -19,28 +19,34 @@ A modern web application that provides real-time insights and comparisons of glo
 ### Setup & Installation
 
 1. Clone the repository:
+
    ```bash
    git clone https://github.com/danish-ali-malik/global-insights.git
    cd global-insights
    ```
 
 2. Install dependencies:
+
    ```bash
    npm install
    ```
 
 3. Set up your environment variables:
+
    ```bash
    cp .env.example .env
    ```
+
    Update the `.env` file with your configuration by referring to `.env.example`
 
 4. Start the database using Docker:
+
    ```bash
    npm run db:up
    ```
 
 5. Generate Prisma client and run migrations:
+
    ```bash
    npm run prisma:generate
    npm run prisma:migrate

@@ -8,10 +8,10 @@ import { Feature } from '../interfaces';
 
 /**
  * Features Array
- * 
+ *
  * Contains the data for all features displayed in the Features section.
  * Each feature includes an icon, title, description, and color scheme.
- * 
+ *
  * @type {Feature[]}
  */
 export const FEATURES: Feature[] = [
@@ -39,4 +39,4 @@ export const FEATURES: Feature[] = [
     Icon: CheckBadgeIcon,
     iconColor: 'text-red-500',
   },
-]; 
+];

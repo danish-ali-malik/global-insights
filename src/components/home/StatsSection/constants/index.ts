@@ -8,10 +8,10 @@ import { Stat } from '../interfaces';
 
 /**
  * Stats Array
- * 
+ *
  * Contains the data for all statistics displayed in the Stats section.
  * Each stat includes a value, label, icon, and color scheme.
- * 
+ *
  * @type {Stat[]}
  */
 export const STATS: Stat[] = [
@@ -39,4 +39,4 @@ export const STATS: Stat[] = [
     Icon: DocumentChartBarIcon,
     iconColor: 'text-orange-500',
   },
-]; 
+];
