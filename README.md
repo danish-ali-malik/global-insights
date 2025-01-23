@@ -8,6 +8,7 @@ A modern web application that provides real-time insights and comparisons of glo
 - **Real-time Analytics**: Track live economic indicators and demographic changes
 - **Country Comparisons**: Side-by-side comparison of multiple countries across various metrics
 - **Custom Data Views**: Create and save personalized dashboards for frequently monitored countries
+- **Auto-Syncing**: Automatic synchronization of country data from reliable sources
 
 ## Getting Started 🚀
 
