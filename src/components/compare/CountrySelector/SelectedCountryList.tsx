@@ -1,17 +1,16 @@
-import { XMarkIcon } from '@heroicons/react/24/outline'
-import Image from 'next/image'
-import { Country } from '../ComparisonSection/interfaces'
+import { XMarkIcon } from '@heroicons/react/24/outline';
+import Image from 'next/image';
+import { Country } from '../ComparisonSection/interfaces';
 
 interface SelectedCountryListProps {
-  selectedCountries: Country[]
-  onRemove: (code: string) => void
+  selectedCountries: Country[];
+  onRemove: (code: string) => void;
 }
 
 export function SelectedCountryList({ selectedCountries, onRemove }: SelectedCountryListProps) {
-
   return (
     <div className="flex flex-wrap gap-2">
-      {selectedCountries.map((country) => (
+      {selectedCountries.map(country => (
         <div
           key={country.code}
           className="flex items-center gap-2 rounded-lg border border-blue-100 bg-blue-50 px-3 py-2 text-blue-800"
@@ -21,7 +20,7 @@ export function SelectedCountryList({ selectedCountries, onRemove }: SelectedCou
             alt={`Flag of ${country.name}`}
             width={24}
             height={16}
-				  style={{ width: '24px', height: '16px' }}
+            style={{ width: '24px', height: '16px' }}
             className="rounded object-cover shadow-sm"
           />
           <span className="font-medium">{country.name}</span>
@@ -35,5 +34,5 @@ export function SelectedCountryList({ selectedCountries, onRemove }: SelectedCou
         </div>
       ))}
     </div>
-  )
-} 
+  );
+}

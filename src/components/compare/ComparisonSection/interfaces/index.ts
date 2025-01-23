@@ -1,7 +1,7 @@
 export interface Country {
-  code: string
-  name: string
-  flagUrl: string
+  code: string;
+  name: string;
+  flagUrl: string;
 }
 
-export type SelectedCountries = Country[] 
+export type SelectedCountries = Country[];
