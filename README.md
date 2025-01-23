@@ -46,11 +46,25 @@ A modern web application that provides real-time insights and comparisons of glo
    npm run db:up
    ```
 
-5. Generate Prisma client and run migrations:
+5. Set up the database:
 
+   For first-time setup:
    ```bash
-   npm run prisma:generate
-   npm run prisma:migrate
+   # Create and apply initial migration
+   npx prisma migrate dev --name init
+   
+   # If the seed data is not automatically loaded, run:
+   npx prisma db seed
+   ```
+
+   For subsequent runs (after pulling new changes):
+   ```bash
+   npx prisma migrate dev
+   ```
+
+   You can verify the database setup using Prisma Studio:
+   ```bash
+   npx prisma studio
    ```
 
 6. Start the development server:
