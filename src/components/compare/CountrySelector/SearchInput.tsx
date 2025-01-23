@@ -1,10 +1,10 @@
-import { MagnifyingGlassIcon } from '@heroicons/react/24/outline'
+import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 
 interface SearchInputProps {
-  value: string
-  onChange: (value: string) => void
-  disabled?: boolean
-  onFocus?: () => void
+  value: string;
+  onChange: (value: string) => void;
+  disabled?: boolean;
+  onFocus?: () => void;
 }
 
 export function SearchInput({ value, onChange, disabled, onFocus }: SearchInputProps) {
@@ -13,7 +13,7 @@ export function SearchInput({ value, onChange, disabled, onFocus }: SearchInputP
       <input
         type="text"
         value={value}
-        onChange={(e) => onChange(e.target.value)}
+        onChange={e => onChange(e.target.value)}
         onFocus={onFocus}
         disabled={disabled}
         placeholder="Search for a country..."
@@ -26,5 +26,5 @@ export function SearchInput({ value, onChange, disabled, onFocus }: SearchInputP
         <MagnifyingGlassIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
       </div>
     </div>
-  )
-} 
+  );
+}

@@ -1,18 +1,18 @@
-'use client'
+'use client';
 
-import { useCallback, useEffect, useRef, useState } from 'react'
-import { ArrowPathIcon, ExclamationCircleIcon, XMarkIcon } from '@heroicons/react/24/outline'
-import { Country, SelectedCountries } from '../ComparisonSection/interfaces'
-import { SearchInput } from './SearchInput'
-import { CountryList } from './CountryList'
-import { SelectedCountryList } from './SelectedCountryList'
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { ArrowPathIcon, ExclamationCircleIcon, XMarkIcon } from '@heroicons/react/24/outline';
+import { Country, SelectedCountries } from '../ComparisonSection/interfaces';
+import { SearchInput } from './SearchInput';
+import { CountryList } from './CountryList';
+import { SelectedCountryList } from './SelectedCountryList';
 
 interface CountrySelectorProps {
-  selectedCountries: SelectedCountries
-  allCountries: Country[]
-  isLoading: boolean
-  onSelectionChange: (countries: SelectedCountries) => void
-  onCompare: (countries: SelectedCountries) => Promise<void>
+  selectedCountries: SelectedCountries;
+  allCountries: Country[];
+  isLoading: boolean;
+  onSelectionChange: (countries: SelectedCountries) => void;
+  onCompare: (countries: SelectedCountries) => Promise<void>;
 }
 
 export function CountrySelector({
@@ -22,96 +22,105 @@ export function CountrySelector({
   onSelectionChange,
   onCompare,
 }: CountrySelectorProps) {
-  const [searchQuery, setSearchQuery] = useState('')
-  const [error, setError] = useState<string | null>(null)
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false)
-  const [isComparing, setIsComparing] = useState(false)
-  const dropdownRef = useRef<HTMLDivElement>(null)
+  const [searchQuery, setSearchQuery] = useState('');
+  const [error, setError] = useState<string | null>(null);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isComparing, setIsComparing] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   // Close dropdown when clicking outside
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
-        setIsDropdownOpen(false)
+        setIsDropdownOpen(false);
       }
     }
 
-    document.addEventListener('mousedown', handleClickOutside)
-    return () => document.removeEventListener('mousedown', handleClickOutside)
-  }, [])
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   // Filter countries based on search query
   const filteredCountries = useCallback(() => {
-    if (!searchQuery) return allCountries
-    const query = searchQuery.toLowerCase()
-    return allCountries.filter(country => 
-      country.name.toLowerCase().includes(query) ||
-      country.code.toLowerCase().includes(query)
-    )
-  }, [allCountries, searchQuery])
+    if (!searchQuery) return allCountries;
+    const query = searchQuery
+      .toLowerCase()
+      .trim()
+      .replace(/[^\w\s-]/g, '');
+    return allCountries.filter(
+      country =>
+        country.name.toLowerCase().includes(query) || country.code.toLowerCase().includes(query)
+    );
+  }, [allCountries, searchQuery]);
 
   // Handle country selection
-  const handleSelect = useCallback((country: Country) => {
-    if (selectedCountries.length >= 3) return
-    if (selectedCountries.some(c => c.code === country.code)) return
-    onSelectionChange([...selectedCountries, country])
-    setSearchQuery('') // Clear search query after selection
-    setIsDropdownOpen(false) // Close dropdown after selection
-  }, [selectedCountries, onSelectionChange])
+  const handleSelect = useCallback(
+    (country: Country) => {
+      if (selectedCountries.length >= 3) return;
+      if (selectedCountries.some(c => c.code === country.code)) return;
+      onSelectionChange([...selectedCountries, country]);
+      setSearchQuery(''); // Clear search query after selection
+      setIsDropdownOpen(false); // Close dropdown after selection
+    },
+    [selectedCountries, onSelectionChange]
+  );
 
   // Handle country removal
-  const handleRemove = useCallback((code: string) => {
-    onSelectionChange(selectedCountries.filter(c => c.code !== code))
-  }, [selectedCountries, onSelectionChange])
+  const handleRemove = useCallback(
+    (code: string) => {
+      onSelectionChange(selectedCountries.filter(c => c.code !== code));
+    },
+    [selectedCountries, onSelectionChange]
+  );
 
   // Handle search input focus
   const handleSearchFocus = useCallback(() => {
-    setIsDropdownOpen(true)
-  }, [])
+    setIsDropdownOpen(true);
+  }, []);
 
   // Handle compare action
   const handleCompare = useCallback(async () => {
-    if (selectedCountries.length < 2 || selectedCountries.length > 3 || isComparing) return
-    
+    if (selectedCountries.length < 2 || selectedCountries.length > 3 || isComparing) return;
+
     try {
-      setIsComparing(true)
-      await onCompare(selectedCountries)
+      setIsComparing(true);
+      await onCompare(selectedCountries);
     } catch (err) {
-      console.error('Error comparing countries:', err)
-      setError(err instanceof Error ? err.message : 'Failed to compare countries')
+      console.error('Error comparing countries:', err);
+      setError(err instanceof Error ? err.message : 'Failed to compare countries');
       // Show error for 3 seconds
-      setTimeout(() => setError(null), 3000)
+      setTimeout(() => setError(null), 3000);
     } finally {
-      setIsComparing(false)
+      setIsComparing(false);
     }
-  }, [selectedCountries, onCompare, isComparing])
+  }, [selectedCountries, onCompare, isComparing]);
 
   // Handle reset
   const handleReset = useCallback(() => {
-    onSelectionChange([])
-    setSearchQuery('')
-    setIsDropdownOpen(false)
-  }, [onSelectionChange])
+    onSelectionChange([]);
+    setSearchQuery('');
+    setIsDropdownOpen(false);
+  }, [onSelectionChange]);
 
   if (error) {
     return (
-      <div role="alert" className="flex items-center gap-2 rounded-md bg-red-50 p-3 text-sm text-red-800">
+      <div
+        role="alert"
+        className="flex items-center gap-2 rounded-md bg-red-50 p-3 text-sm text-red-800"
+      >
         <ExclamationCircleIcon className="h-5 w-5 text-red-600" />
         <p>{error}</p>
       </div>
-    )
+    );
   }
 
-  const isCompareDisabled = selectedCountries.length < 2 || isComparing
+  const isCompareDisabled = selectedCountries.length < 2 || isComparing;
 
   return (
-	  <div className="space-y-4  bg-gray-50 p-6 rounded-lg max-w-2xl mx-auto w-full">
+    <div className="mx-auto  w-full max-w-2xl space-y-4 rounded-lg bg-gray-50 p-6">
       <div className="flex items-center justify-between">
         <div className="flex-1">
-          <SelectedCountryList
-            selectedCountries={selectedCountries}
-            onRemove={handleRemove}
-          />
+          <SelectedCountryList selectedCountries={selectedCountries} onRemove={handleRemove} />
         </div>
         {selectedCountries.length > 0 && (
           <button
@@ -146,9 +155,10 @@ export function CountrySelector({
         onClick={handleCompare}
         disabled={isCompareDisabled}
         className={`flex w-full items-center justify-center gap-2 rounded-lg px-4 py-3 text-sm font-medium transition-colors
-          ${isCompareDisabled
-            ? 'cursor-not-allowed bg-gray-100 text-gray-400'
-            : 'bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2'
+          ${
+            isCompareDisabled
+              ? 'cursor-not-allowed bg-gray-100 text-gray-400'
+              : 'bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2'
           }`}
       >
         {isComparing ? (
@@ -165,5 +175,5 @@ export function CountrySelector({
         )}
       </button>
     </div>
-  )
-} 
+  );
+}
