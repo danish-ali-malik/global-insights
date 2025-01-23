@@ -10,14 +10,20 @@ datasource db {
 // Country model
 model Country {
   id          String   @id @default(cuid())
-  name        String   @unique
-  code        String   @unique // ISO country code
-  population  Int?
-  gdp         Float?
-  area        Float?   // in square kilometers
+  name        String   @unique // common name
+  officialName String  // official name
+  code        String   @unique // ISO country code (cca3)
   capital     String?
   region      String?
   subregion   String?
+  population  Int?
+  area        Float?   // in square kilometers
+  flagUrl     String   // SVG URL
+  currencies  String[] // Array of currency codes
+  languages   String[] // Array of language codes
+  borders     String[] // Array of neighboring country codes
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+
+  @@index([code])
 }

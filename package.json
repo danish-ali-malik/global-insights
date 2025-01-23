@@ -2,6 +2,9 @@
   "name": "global-insights",
   "version": "0.1.0",
   "private": true,
+  "prisma": {
+    "seed": "ts-node prisma/seed.ts"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -22,9 +25,12 @@
   "dependencies": {
     "@heroicons/react": "^2.2.0",
     "@prisma/client": "^6.0.0",
+    "apexcharts": "^4.4.0",
     "next": "15.1.5",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-apexcharts": "^1.7.0",
+    "react-dom": "^19.0.0",
+    "axios": "^1.6.5"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
